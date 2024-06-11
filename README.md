@@ -71,6 +71,8 @@ python lib/init_db.py
 This will recreate the database and initialize it with the required tables.
 
 ## Project Structure
+
+```console
 .
 ├── Pipfile
 ├── Pipfile.lock
@@ -87,6 +89,7 @@ This will recreate the database and initialize it with the required tables.
     ├── debug.py
     ├── helpers.py
     └── init_db.py
+```
 
 ## Models
 - **Patient**: Contains information about patients.
