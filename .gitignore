@@ -1,1 +1,3 @@
 hospital_inventory.db
+lib/__pycache__/
+lib/models/__pycache__/
