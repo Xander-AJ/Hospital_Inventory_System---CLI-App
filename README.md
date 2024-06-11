@@ -29,26 +29,33 @@ User Side
 .Search Patients: Search for patients by different attributes.
 
 ## Installation
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/hospital-system-cli.git
-    ```
-2. Change into the project directory:
-    ```bash
-    cd hospital-system-cli
-    ```
-3. Install dependencies:
-    ```bash
-    pipenv install
-    ```
-4. Activate the virtual environment:
-    ```bash
-    pipenv shell
-    ```
-5. Initialize the database:
-    ```bash
-    python lib/init_db.py
-    ```
+Prerequisites
+
+.Python 3.x
+
+.Pipenv
+
+Steps
+
+Clone the repository:
+
+git clone <https://github.com/your-username/hospital-system-cli.git>
+
+Change into the project directory:
+
+cd hospital-system-cli
+
+Install dependencies:
+
+pipenv install
+
+Activate the virtual environment:
+
+pipenv shell
+
+Initialize the database:
+
+python lib/init_db.py
 
 ## Usage
 Run the main application:
