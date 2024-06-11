@@ -6,7 +6,6 @@ from lib.models.appointment import Appointment
 from models.user import User
 from models.role import Role
 
-
 Session = sessionmaker(bind=engine)
 
 
