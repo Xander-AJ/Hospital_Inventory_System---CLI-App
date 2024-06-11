@@ -58,12 +58,8 @@ Initialize the database:
 python lib/init_db.py
 
 ## Usage
-Run the main application:
-```bash
-python cli.py
-```
-
-Follow the on-screen instructions to navigate through the menus and manage the hospital inventory.
+To run the main application, execute the following command:
+python lib/cli.py
 
 ## Development
 For development purposes, you can use `ipython` for an interactive shell.
