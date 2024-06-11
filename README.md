@@ -2,6 +2,7 @@
 
 ## Overview
 The Hospital Inventory Management System is a command-line interface (CLI) application designed to help hospitals manage their inventory efficiently. This application allows users to manage and view information related to patients, doctors, and appointments. It also provides functionalities to manage users, search patients, and generate reports.
+The Hospital Inventory Management System is a command-line interface (CLI) application designed to help hospitals manage their inventory efficiently. This application allows users to manage and view information related to patients, doctors, and appointments. It also provides functionalities to manage users, search patients, and generate reports.
 
 ## Features
 
