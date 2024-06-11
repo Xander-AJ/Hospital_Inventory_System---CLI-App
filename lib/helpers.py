@@ -2,7 +2,7 @@ from sqlalchemy.orm import sessionmaker
 from models import engine
 from models.patient import Patient
 from models.doctor import Doctor
-from models.appointment import Appointment
+from lib.models.appointment import Appointment
 from models.user import User
 from models.role import Role
 
