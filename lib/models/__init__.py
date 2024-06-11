@@ -2,9 +2,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('sqlite:///hospital_inventory.db')
+engine = create_engine("sqlite:///hospital_inventory.db")
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
+
 
 def init_db():
     from .patient import Patient
@@ -12,5 +13,5 @@ def init_db():
     from .appointment import Appointment
     from .user import User
     from .role import Role
-    Base.metadata.create_all(engine)
 
+    Base.metadata.create_all(engine)
