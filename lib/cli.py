@@ -93,10 +93,10 @@ def view_doctor_appointments_tabulated(doctor_id):
 
 
 def display_welcome_message():
-    print(Fore.BLUE + "Hii👋🏾Welcome to SDF_FT-09 Hospital.")
+    print(Fore.BLUE + "Hii👋 Welcome to SDF_FT-09 Hospital.")
     print(
         Fore.YELLOW
-        + "Where it's vibes and Inshallah until we start standing on Business! 😅"
+        + "Where it's vibes and insha allah until we start standing on Business! 😅"
     )
     print(Fore.CYAN + "Don't worry, we've got you.")
 
