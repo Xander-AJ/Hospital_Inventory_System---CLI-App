@@ -2,9 +2,10 @@ from sqlalchemy.orm import sessionmaker
 from models import engine
 from models.patient import Patient
 from models.doctor import Doctor
-from lib.models.appointment import Appointment
+from models.appointment import Appointment
 from models.user import User
 from models.role import Role
+from datetime import datetime
 
 Session = sessionmaker(bind=engine)
 
@@ -123,10 +124,9 @@ def view_patient_residents():
         )
 
 
-def view_patient_details():
+def view_patient_details(patient_id):
     session = Session()
-    patient_id = input("Enter patient ID: ")
-    patient = session.query(Patient).filter_by(id=int(patient_id)).first()
+    patient = session.query(Patient).filter_by(id=patient_id).first()
     if patient:
         print(
             f"ID: {patient.id}, Name: {patient.name}, Age: {patient.age}, Address: {patient.address}, Phone: {patient.phone}"
@@ -135,10 +135,9 @@ def view_patient_details():
         print("Patient not found.")
 
 
-def view_doctor_appointments():
+def view_doctor_appointments(doctor_id):
     session = Session()
-    doctor_id = input("Enter doctor ID: ")
-    appointments = session.query(Appointment).filter_by(doctor_id=int(doctor_id)).all()
+    appointments = session.query(Appointment).filter_by(doctor_id=doctor_id).all()
     print("\nDoctor's Appointments")
     for appointment in appointments:
         print(
