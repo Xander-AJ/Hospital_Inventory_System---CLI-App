@@ -124,9 +124,16 @@ def appointment_menu():
         if choice == "1":
             patient_id = input("Enter patient ID: ")
             doctor_id = input("Enter doctor ID: ")
-            appointment_time = input("Enter appointment time (YYYY-MM-DD HH:MM): ")
-            book_appointment(patient_id, doctor_id, appointment_time)
-            print("Appointment booked successfully.")
+            appointment_time_str = input("Enter appointment time (YYYY-MM-DD HH:MM): ")
+            try:
+                appointment_time = datetime.strptime(
+                    appointment_time_str, "%Y-%m-%d %H:%M"
+                )
+                book_appointment(patient_id, doctor_id, appointment_time)
+            except ValueError:
+                print("Invalid date/time format. Please try again.")
+            else:
+                print("Appointment booked successfully.")
 
         elif choice == "2":
             appointment_id = input("Enter appointment ID to update: ")
