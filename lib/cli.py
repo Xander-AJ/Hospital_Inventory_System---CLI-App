@@ -1,5 +1,6 @@
 from datetime import datetime
 from colorama import init, Fore, Style
+from tabulate import tabulate
 from helpers import (
     add_patient,
     delete_patient,
@@ -29,8 +30,70 @@ from models import init_db
 init(autoreset=True)
 
 
+# Define the new view functions here or import them if defined elsewhere
+def view_doctors_tabulated():
+    session = session()
+    doctors = session.query(doctor).all()
+    data = []
+    for doctor in doctors:
+        data.append([doctor.id, doctor.name, doctor.specialization, doctor.phone])
+    print(
+        tabulate(
+            data, headers=["ID", "Name", "Specialization", "Phone"], tablefmt="pretty"
+        )
+    )
+
+
+def view_patient_residents_tabulated():
+    session = session()
+    patients = session.query(patient).all()
+    data = []
+    for patient in patients:
+        data.append(
+            [patient.id, patient.name, patient.age, patient.address, patient.phone]
+        )
+    print(
+        tabulate(
+            data, headers=["ID", "Name", "Age", "Address", "Phone"], tablefmt="pretty"
+        )
+    )
+
+
+def view_patient_details_tabulated(patient_id):
+    session = session()
+    patient = session.query(patient).filter_by(id=patient_id).first()
+    if patient:
+        data = [[patient.id, patient.name, patient.age, patient.address, patient.phone]]
+        print(
+            tabulate(
+                data,
+                headers=["ID", "Name", "Age", "Address", "Phone"],
+                tablefmt="pretty",
+            )
+        )
+    else:
+        print("Patient not found.")
+
+
+def view_doctor_appointments_tabulated(doctor_id):
+    session = session()
+    appointments = session.query(appointment).filter_by(doctor_id=doctor_id).all()
+    data = []
+    for appointment in appointments:
+        data.append(
+            [appointment.id, appointment.patient_id, appointment.appointment_time]
+        )
+    print(
+        tabulate(
+            data,
+            headers=["Appointment ID", "Patient ID", "Appointment Time"],
+            tablefmt="pretty",
+        )
+    )
+
+
 def display_welcome_message():
-    print(Fore.BLUE + "Hii 👋🏾, Welcome to SDF_FT-09 Hospital.")
+    print(Fore.BLUE + "Hii👋🏾Welcome to SDF_FT-09 Hospital.")
     print(
         Fore.YELLOW
         + "Where it's vibes and Inshallah until we start standing on Business! 😅"
