@@ -1,4 +1,5 @@
 from datetime import datetime
+from colorama import init, Fore, Style
 from helpers import (
     add_patient,
     delete_patient,
@@ -23,6 +24,18 @@ from helpers import (
     generate_appointment_statistics,
 )
 from models import init_db
+
+# Initialize colorama
+init(autoreset=True)
+
+
+def display_welcome_message():
+    print(Fore.BLUE + "Hii 👋🏾, Welcome to SDF_FT-09 Hospital.")
+    print(
+        Fore.YELLOW
+        + "Where it's vibes and Inshallah until we start standing on Business! 😅"
+    )
+    print(Fore.CYAN + "Don't worry, we've got you.")
 
 
 def patient_menu():
@@ -240,6 +253,7 @@ def admin_menu():
 
 def main_menu():
     init_db()
+    display_welcome_message()  # Call the welcome message here
     while True:
         print("\nMain Menu")
         print("1. Patient Menu")
