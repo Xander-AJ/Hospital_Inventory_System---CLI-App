@@ -111,12 +111,8 @@ def appointment_menu():
         if choice == "1":
             patient_id = input("Enter patient ID: ")
             doctor_id = input("Enter doctor ID: ")
-            appointment_time = input("Enter appointment time (YYYY-MM-DD HH:MM:SS): ")
-            book_appointment(
-                patient_id,
-                doctor_id,
-                datetime.strptime(appointment_time, "%Y-%m-%d %H:%M:%S"),
-            )
+            appointment_time = input("Enter appointment time (YYYY-MM-DD HH:MM): ")
+            book_appointment(patient_id, doctor_id, appointment_time)
             print("Appointment booked successfully.")
 
         elif choice == "2":
@@ -124,18 +120,9 @@ def appointment_menu():
             patient_id = input("Enter new patient ID (leave blank to skip): ")
             doctor_id = input("Enter new doctor ID (leave blank to skip): ")
             appointment_time = input(
-                "Enter new appointment time (YYYY-MM-DD HH:MM:SS) (leave blank to skip): "
+                "Enter new appointment time (YYYY-MM-DD HH:MM, leave blank to skip): "
             )
-            update_appointment(
-                appointment_id,
-                patient_id,
-                doctor_id,
-                (
-                    datetime.strptime(appointment_time, "%Y-%m-%d %H:%M:%S")
-                    if appointment_time
-                    else None
-                ),
-            )
+            update_appointment(appointment_id, patient_id, doctor_id, appointment_time)
             print("Appointment updated successfully.")
 
         elif choice == "3":
@@ -157,7 +144,7 @@ def view_menu():
         print("2. View Doctors")
         print("3. View Patient Residents")
         print("4. View Patient Details")
-        print("5. View Doctor's Appointments")
+        print("5. View Doctor Appointments")
         print("6. Back to Main Menu")
         choice = input("Enter your choice: ")
 
@@ -171,10 +158,12 @@ def view_menu():
             view_patient_residents()
 
         elif choice == "4":
-            view_patient_details()
+            patient_id = input("Enter patient ID: ")
+            view_patient_details(patient_id)
 
         elif choice == "5":
-            view_doctor_appointments()
+            doctor_id = input("Enter doctor ID: ")
+            view_doctor_appointments(doctor_id)
 
         elif choice == "6":
             break
@@ -183,13 +172,17 @@ def view_menu():
             print("Invalid choice. Please try again.")
 
 
-def manage_users():
+def admin_menu():
     while True:
-        print("\nUser Management Menu")
-        print("1. Add New User")
+        print("\nAdmin Menu")
+        print("1. Add User")
         print("2. Delete User")
-        print("3. Update User Details")
-        print("4. Back to Main Menu")
+        print("3. Update User")
+        print("4. Search Patients")
+        print("5. Filter Appointments by Date")
+        print("6. Generate Patient Report")
+        print("7. Generate Appointment Statistics")
+        print("8. Back to Main Menu")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -213,63 +206,32 @@ def manage_users():
             print("User details updated successfully.")
 
         elif choice == "4":
-            break
-
-        else:
-            print("Invalid choice. Please try again.")
-
-
-def search_menu():
-    while True:
-        print("\nSearch Menu")
-        print("1. Search Patients")
-        print("2. Filter Appointments by Date")
-        print("3. Back to Main Menu")
-        choice = input("Enter your choice: ")
-
-        if choice == "1":
-            query = input("Enter patient name to search: ")
+            query = input("Enter search query: ")
             patients = search_patients(query)
             for patient in patients:
                 print(
                     f"ID: {patient.id}, Name: {patient.name}, Age: {patient.age}, Address: {patient.address}, Phone: {patient.phone}"
                 )
 
-        elif choice == "2":
+        elif choice == "5":
             start_date = input("Enter start date (YYYY-MM-DD): ")
             end_date = input("Enter end date (YYYY-MM-DD): ")
             appointments = filter_appointments_by_date(start_date, end_date)
             for appointment in appointments:
                 print(
-                    f"Appointment ID: {appointment.id}, Patient ID: {appointment.patient_id}, Doctor ID: {appointment.doctor_id}, Appointment Time: {appointment.appointment_time}"
+                    f"ID: {appointment.id}, Patient ID: {appointment.patient_id}, Doctor ID: {appointment.doctor_id}, Appointment Time: {appointment.appointment_time}"
                 )
 
-        elif choice == "3":
-            break
-
-        else:
-            print("Invalid choice. Please try again.")
-
-
-def report_menu():
-    while True:
-        print("\nReport Menu")
-        print("1. Generate Patient Report")
-        print("2. Generate Appointment Statistics")
-        print("3. Back to Main Menu")
-        choice = input("Enter your choice: ")
-
-        if choice == "1":
+        elif choice == "6":
             report = generate_patient_report()
-            for item in report:
-                print(item)
+            for patient in report:
+                print(patient)
 
-        elif choice == "2":
+        elif choice == "7":
             stats = generate_appointment_statistics()
-            for key, value in stats.items():
-                print(f"{key}: {value}")
+            print(stats)
 
-        elif choice == "3":
+        elif choice == "8":
             break
 
         else:
@@ -280,32 +242,32 @@ def main_menu():
     init_db()
     while True:
         print("\nMain Menu")
-        print("1. Manage Patients")
-        print("2. Manage Doctors")
-        print("3. Manage Appointments")
-        print("4. View Information")
-        print("5. Manage Users")
-        print("6. Search")
-        print("7. Reports")
-        print("8. Exit")
+        print("1. Patient Menu")
+        print("2. Doctor Menu")
+        print("3. Appointment Menu")
+        print("4. View Menu")
+        print("5. Admin Menu")
+        print("6. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
             patient_menu()
+
         elif choice == "2":
             doctor_menu()
+
         elif choice == "3":
             appointment_menu()
+
         elif choice == "4":
             view_menu()
+
         elif choice == "5":
-            manage_users()
+            admin_menu()
+
         elif choice == "6":
-            search_menu()
-        elif choice == "7":
-            report_menu()
-        elif choice == "8":
             break
+
         else:
             print("Invalid choice. Please try again.")
 
