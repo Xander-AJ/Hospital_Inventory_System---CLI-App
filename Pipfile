@@ -8,5 +8,5 @@ ipython = "*"
 
 [packages]
 sqlalchemy = "*"
-colorama = "*"
 tabulate = "*"
+colorama = "*"
