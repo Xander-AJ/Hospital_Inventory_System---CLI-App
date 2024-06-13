@@ -101,7 +101,22 @@ def display_welcome_message():
     print(Fore.CYAN + "Don't worry, we've got you.")
 
 
+def is_valid(name):
+    if not name.isalpha() or name.strip() == "":
+        raise ValueError("Patient name must contain only characters and cannot be empty.")
+    return name
+def is_valid_age(age):
+    age = int(age)
+    if age < 0 or age > 110:
+        raise ValueError("Age must be a number between 0 and 110.")
+    return age
+def is_valid_phone_number(phone):
+    if not phone.isnumeric() or len(phone)!= 10:
+        raise ValueError("Phone number must be 10 digits.")
+    return phone
+
 def patient_menu():
+    
     while True:
         print("\nPatient Menu")
         print("1. Add New Patient")
@@ -112,9 +127,12 @@ def patient_menu():
 
         if choice == "1":
             name = input("Enter patient name: ")
+            name=is_valid(name)
             age = input("Enter patient age: ")
+            age=is_valid_age(age)
             address = input("Enter patient address: ")
-            phone = input("Enter patient phone: ")
+            phone = input("Enter patient phone:(07xxxxxxxx)")
+            phone=is_valid_phone_number(phone)
             add_patient(name, age, address, phone)
             print("Patient added successfully.")
 
@@ -138,7 +156,7 @@ def patient_menu():
         else:
             print("Invalid choice. Please try again.")
 
-
+    
 def doctor_menu():
     while True:
         print("\nDoctor Menu")
@@ -150,8 +168,10 @@ def doctor_menu():
 
         if choice == "1":
             name = input("Enter doctor name: ")
+            is_valid(name)
             specialization = input("Enter doctor specialization: ")
             phone = input("Enter doctor phone: ")
+            is_valid_phone_number(phone)
             add_doctor(name, specialization, phone)
             print("Doctor added successfully.")
 
